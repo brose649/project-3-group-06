@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SpaceX Dashboard</title>
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://bootswatch.com/5/vapor/bootstrap.min.css", rel="stylesheet">
+    <link href="./static/css/static.css" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+
+    <!-- Leaflet JavaScript code -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+    <!-- Leaflet heatmap plugin-->
+    <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
+
+    <!-- Marker cluster JavaScript code -->
+    <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+
+    <!-- Marker cluster CSS -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+
+
+    <!-- JS IMPORTS - External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">LOGO</a>
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" href="/map">Map</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/about_us">About Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- add spacing -->
+    <br/>
+
+    <!-- Dashboard -->
+     <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>SpaceX Dashboard</h1>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="launch_filter">Min Launches</label>
+                <input type="number" value="10" id="launch_filter">
+
+                <label for="region_filter">Region</label>
+                <select id="region_filter">
+                    <option selected>All</option>
+                    <option>California</option>
+                    <option>Florida</option>
+                    <option>Marshall Islands</option>
+                    <option>Texas</option>
+                </select>
+
+                <button id="filter">Filter!</button>
+            </div>
+            <div class="col-md-6">
+                <p>Bacon ipsum dolor amet ribeye chicken leberkas ham hock meatloaf bresaola shoulder. Burgdoggen porchetta buffalo, kielbasa ham chicken filet mignon sirloin pancetta. Capicola biltong strip steak, drumstick tongue chislic pork belly jowl beef swine buffalo. Hamburger cupim shank chuck turkey venison frankfurter short ribs tail. Ham hock chicken shank beef ribs picanha biltong tail rump alcatra short ribs kevin cupim pork loin.</p>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div id="map-container"></div>
+            </div>
+        </div>
+     </div>
+
+     <br/>
+     <br/>
+
+    <script src="./static/js/map.js"></script>
+</body>
+
+</html>
