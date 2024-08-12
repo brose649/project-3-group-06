@@ -15,7 +15,7 @@ class SQLHelper():
 
     # define properties
     def __init__(self):
-        self.engine = create_engine("sqlite:///spacex.sqlite")
+        self.engine = create_engine("sqlite:///ufo.sqlite")
         # self.Base = None
 
         # automap Base classes
@@ -122,33 +122,47 @@ class SQLHelper():
         data = df.to_dict(orient="records")
         return(data)
 
-    def get_map(self, min_attempts, region):
+    def get_map(self, shape, state):
 
-        # switch on user_region
-        if region == 'All':
-            where_clause = "and 1=1"
+        # switch on state
+        if state == 'All':
+            state_clause = "and 1=1"
         else:
-            where_clause = f"and region = '{region}'"
+            state_clause = f"and state = '{state}'"
+
+        # switch on shape
+        if shape == 'All':
+            shape_clause = "and 1=1"
+        else:
+            shape_clause = f"and shape = '{shape}'"
 
         # build the query
         query = f"""
-            SELECT
-                name,
-                full_name,
-                region,
-                latitude,
-                longitude,
-                launch_attempts,
-                launch_successes,
-                launch_attempts - launch_successes as launch_failures
-            FROM
-                launchpads
-            WHERE
-                launch_attempts >= {min_attempts}
-                {where_clause}
-            ORDER BY
-                launch_attempts DESC;
-        """
+                    SELECT
+                        datetime,
+                        city,
+                        state,
+                        country,
+                        shape,
+                        duration_seconds,
+                        duration_hours_min,
+                        comments,
+                        date_posted,
+                        latitude,
+                        longitude,
+                        hour,
+                        month,
+                        year,
+                        dayofweek
+                    FROM
+                        ufo
+                    WHERE
+                        1=1
+                        {shape_clause}
+                        {state_clause}
+                    ORDER BY
+                        datetime DESC;
+                """
 
         df = pd.read_sql(text(query), con = self.engine)
         data = df.to_dict(orient="records")
