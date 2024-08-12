@@ -33,26 +33,27 @@ function createMap(data) {
   let markerColor = 'green';
 
   //Custom Icons to be loaded onto markers for each Category
-  // const iconMapping = {
-  //   'circle': 'static/icons/circle.png',
-  //   'triangle': 'static/icons/triangle.png',
-  //   'formation': 'static/icons/formation.png',
-  //   'light': 'static/icons/light.png',
-  //   'other': 'static/icons/other.png',
-  //   'oval': 'static/icons/oval.png',
-  //   'rectangle': 'static/icons/rectangle.png'
-  // };
+  const iconMapping = {
+    'Circular': 'static/icons/circle.png',
+    'Angular': 'static/icons/triangle.png',
+    'Formation': 'static/icons/formation.png',
+    'Luminous': 'static/icons/light.png',
+    'Other': 'static/icons/other.png',
+    'Elliptical': 'static/icons/oval.png',
+    'Rectangular': 'static/icons/rectangle.png'
+  };
 
   for (let i = 0; i < data.length; i++){
     let row = data[i];
     let latitude = row.latitude;
     let longitude = row.longitude;
+    // let shape = row.shape;
 
     // Once category column is created, use this to convert to variable for icon usage
-    //let category = row.category;
+    let category = row.category;
 
     // Assign variable to populate appropriate icon for each marker
-    // let iconUrl = iconMapping[shape] || 'static/icons/alien.png';
+    let iconUrl = iconMapping[category] || 'static/icons/alien.png';
 
     // extract coord
     let point = [latitude, longitude];
@@ -63,27 +64,27 @@ function createMap(data) {
     let capitalShape = capitalizeString(row.shape);
 
     // Create a custom icon with the color
-    let customIcon = L.divIcon({
-      className: 'custom-div-icon',
-      html: `<div style="background-color:${markerColor}; width:20px; height:20px; border-radius:50%;"></div>`,
-      iconSize: [20, 20],
-      popupAnchor: [0, -10]
-    });
-
-    // Create a custom icon with the color and custom icon
     // let customIcon = L.divIcon({
     //   className: 'custom-div-icon',
-    //   html: `<div style="background-color:${markerColor}; width:20px; height:20px; border-radius:50%; display: flex; align-items: center; justify-content: center;">
-    //   <img src="${iconMapping[shape]}" style="width:16px; height:16px;">
-    //   </div>`,
+    //   html: `<div style="background-color:${markerColor}; width:20px; height:20px; border-radius:50%;"></div>`,
     //   iconSize: [20, 20],
     //   popupAnchor: [0, -10]
     // });
+
+    // Create a custom icon with the color and custom icon
+    let customIcon = L.divIcon({
+      className: 'custom-div-icon',
+      html: `<div style="background-color:${markerColor}; width:20px; height:20px; border-radius:50%; display: flex; align-items: center; justify-content: center;">
+      <img src="${iconUrl}" style="width:32px; height:32px;">
+      </div>`,
+      iconSize: [20, 20],
+      popupAnchor: [0, -10]
+    });
     
     // make marker
     let marker = L.marker(point, { icon: customIcon });
     let popup = `<h3>Date Posted: ${row.date_posted}</h3><hr>
-      <h4>Day of Sighting: ${row.dayofweek}<hr>City: ${capitalCity}<hr>Shape: ${capitalShape}<hr>Comments: ${row.comments}</h4>`;
+      <h4>Day of Sighting: ${row.dayofweek}<hr>City: ${capitalCity}<hr>Shape: ${capitalShape}<hr>Category: ${category}<hr>Comments: ${row.comments}</h4>`;
     marker.bindPopup(popup);
     markers.addLayer(marker);
 
@@ -133,11 +134,12 @@ function createMap(data) {
 
 function do_work() {
   // Extract user input (abbreviation will be sent)
-  let shape = d3.select("#shape_filter").property("value");
+  // let shape = d3.select("#shape_filter").property("value");
   let state = d3.select("#state_filter").property("value");
+  let categoryValue = d3.select("#category_filter").property("value");
 
   // Make the API request with the selected abbreviation
-  let url = `/api/v1.0/get_map/${shape}/${state}`;
+  let url = `/api/v1.0/get_map/${categoryValue}/${state}`;
   
   d3.json(url).then(function (data) {
       createMap(data);

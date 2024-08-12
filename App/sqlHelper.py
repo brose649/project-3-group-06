@@ -122,7 +122,7 @@ class SQLHelper():
         data = df.to_dict(orient="records")
         return(data)
 
-    def get_map(self, shape, state):
+    def get_map(self, category, state):
 
         # switch on state
         if state == 'All':
@@ -130,11 +130,17 @@ class SQLHelper():
         else:
             state_clause = f"and state = '{state}'"
 
-        # switch on shape
-        if shape == 'All':
-            shape_clause = "and 1=1"
+        # # switch on shape
+        # if shape == 'All':
+        #     shape_clause = "and 1=1"
+        # else:
+        #     shape_clause = f"and shape = '{shape}'"
+
+        # switch on category
+        if category == 'All':
+            category_clause = "and 1=1"
         else:
-            shape_clause = f"and shape = '{shape}'"
+            category_clause = f"and category = '{category}'"
 
         # build the query
         query = f"""
@@ -144,6 +150,7 @@ class SQLHelper():
                         state,
                         country,
                         shape,
+                        category,
                         duration_seconds,
                         duration_hours_min,
                         comments,
@@ -158,7 +165,7 @@ class SQLHelper():
                         ufo
                     WHERE
                         1=1
-                        {shape_clause}
+                        {category_clause}
                         {state_clause}
                     ORDER BY
                         datetime DESC;

@@ -42,7 +42,7 @@
 <body>
     <!-- NAVBAR -->
     <!-- <nav class="navbar navbar-expand-lg" data-bs-theme="dark"> -->
-    <nav class="navbar navbar-expand-lg" style="background-image: url('static/images/banner.jpg');" data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg" style="background-image: url('/static/images/banner.jpg');" data-bs-theme="dark">
         <div class="container-fluid">
             <!-- <a class="navbar-brand"  href="/"><img src="static/icons/alien.png" alt="Logo" width="32" height="32" class="d-inline-block align-text-top"></a> -->
             <div class="navbar-brand">
@@ -135,7 +135,7 @@
                     <option value="wy">Wyoming</option>
                 </select>
 
-                <label for="shape_filter">Shape</label>
+                <!-- <label for="shape_filter">Shape</label>
                 <select id="shape_filter">
                     <option selected>All</option>  
                     <option value="changing">Changing</option>
@@ -157,6 +157,18 @@
                     <option value="teardrop">Teardrop</option>
                     <option value="triangle">Triangle</option>
                     <option value="unknown">Unknown</option>                               
+                </select> -->
+
+                <label for="category_filter">Category</label>
+                <select id="category_filter">
+                    <option selected>All</option>  
+                    <option value="Circular">Circular</option>
+                    <option value="Angular">Angular</option>
+                    <option value="Formation">Formation</option>
+                    <option value="Luminous">Luminous</option>
+                    <option value="Other">Other</option>
+                    <option value="Elliptical">Elliptical</option>
+                    <option value="Rectangular">Rectangular</option>
                 </select>
 
                 <button id="filter">Filter!</button>
@@ -167,12 +179,11 @@
                     Within the map is an additional layer for a heatmap of reported sightings.
                 </p> -->
                 <p>
-                    Welcome to the UFO Sightings Map! This interactive map allows you to explore reported UFO sightings across the United States. 
-                    To begin, use the filters on the left to narrow down the sightings by selecting a specific state and/or the shape of the object observed. 
-                    Once filtered, the map will update to show markers indicating where these sightings were reported. 
-                    You can click on any marker to see more detailed information about the sighting, including the date, shape, and any additional comments provided by the observer.
-                    Additionally, you can toggle the heatmap layer to visualize the density of sightings across different regions, giving you a quick overview of hotspots where UFO activity has been most frequently reported. 
-                    This tool is designed to help you investigate patterns and trends in UFO sightings with ease. Have fun exploring, and who knows, you might uncover something extraordinary!
+                    This map allows you to explore reported UFO sightings across the United States.
+                    Use the filters on the left to narrow down the sightings by specified State or Category.
+                    When you click Filter! the map will update with only sightings matching your chosen filters 
+                    Click on any marker to bring up additional information for each sighting.
+                    Additionally, you can choose from different map layouts as well as toggle a heatmap of the filtered sightings!
                 </p>
                 
             </div>
