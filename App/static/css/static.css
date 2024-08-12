@@ -5,3 +5,21 @@
 #map {
     height: 100%;
 }
+
+nav.navbar {
+    background-image: url('static/images/banner.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: relative;
+}
+
+nav.navbar .nav-link, nav.navbar .navbar-brand {
+    position: relative;
+    z-index: 1;
+    color: #ffffff;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+}
