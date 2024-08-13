@@ -34,90 +34,77 @@ class SQLHelper():
     #################################################
 
     # USING RAW SQL
-    def get_bar(self, min_attempts, region):
+    def get_frequency(self, year):
 
-        # switch on user_region
-        if region == 'All':
-            where_clause = "and 1=1"
+        if year == 'All':
+            where_clause = "1=1"
         else:
-            where_clause = f"and region = '{region}'"
+            where_clause = f"year = { year }"
 
-        # build the query
         query = f"""
-            SELECT
-                name,
-                full_name,
-                region,
-                launch_attempts,
-                launch_successes
-            FROM
-                launchpads
-            WHERE
-                launch_attempts >= {min_attempts}
-                {where_clause}
-            ORDER BY
-                launch_attempts DESC;
-        """
-
-        df = pd.read_sql(text(query), con = self.engine)
+                SELECT 
+                    year AS years, 
+                    COUNT(*) AS frequency
+                FROM 
+                    ufo
+                WHERE
+                    {where_clause}
+                GROUP BY 
+                    years
+                ORDER BY 
+                    years DESC;
+                """
+        
+        df = pd.read_sql(text(query), con=self.engine)
         data = df.to_dict(orient="records")
         return(data)
 
-    def get_pie(self, min_attempts, region):
+    def get_by_month(self, year):
 
-        # switch on user_region
-        if region == 'All':
-            where_clause = "and 1=1"
-        else:
-            where_clause = f"and region = '{region}'"
+        where_clause = f"year = {year}"
 
-        # build the query
         query = f"""
-            SELECT
-                name,
-                region,
-                launch_attempts
-            FROM
-                launchpads
-            WHERE
-                launch_attempts >= {min_attempts}
-                {where_clause}
-            ORDER BY
-                launch_attempts DESC;
-        """
-
-        df = pd.read_sql(text(query), con = self.engine)
+                SELECT
+                    year,
+                    month,
+                    COUNT(*) AS frequency
+                FROM
+                    ufo
+                WHERE
+                    {where_clause}
+                GROUP BY
+                    year, month
+                ORDER BY 
+                    year DESC, month ASC;
+            """
+        df = pd.read_sql(text(query), con=self.engine)
         data = df.to_dict(orient="records")
         return(data)
 
-    def get_table(self, min_attempts, region):
-
+    def get_table(self, year):
         # switch on user_region
-        if region == 'All':
+        if year == 'All':
             where_clause = "and 1=1"
         else:
-            where_clause = f"and region = '{region}'"
-
+            where_clause = f"and year = '{year}'"
         # build the query
         query = f"""
             SELECT
-                name,
-                full_name,
-                region,
+                dayofweek,
+                city,
+                state,
+                hour,
+                month,
+                year,
                 latitude,
-                longitude,
-                launch_attempts,
-                launch_successes,
-                launch_attempts - launch_successes as launch_failures
+                longitude
             FROM
-                launchpads
+                ufo
             WHERE
-                launch_attempts >= {min_attempts}
                 {where_clause}
             ORDER BY
-                launch_attempts DESC;
+                dayofweek DESC;
         """
-
         df = pd.read_sql(text(query), con = self.engine)
         data = df.to_dict(orient="records")
         return(data)

@@ -30,5 +30,17 @@ body {
 }
 
 .leaflet-container .leaflet-popup-content {
-    color: #ffffff !important; /* Ensure the text inside is white */
+    color: #ffffff !important;
+}
+
+@keyframes glow {
+    0% { text-shadow: 0 0 10px #00e6e6, 0 0 20px #00e6e6, 0 0 30px #00e6e6, 0 0 40px #00e6e6; }
+    100% { text-shadow: 0 0 20px #00e6e6, 0 0 30px #00e6e6, 0 0 40px #00e6e6, 0 0 50px #00e6e6; }
+}
+
+h1 {
+    font-size: 3em;
+    color: #00e6e6;
+    text-align: center;
+    animation: glow 1.5s infinite alternate;
 }

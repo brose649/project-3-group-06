@@ -83,8 +83,8 @@ function createMap(data) {
     
     // make marker
     let marker = L.marker(point, { icon: customIcon });
-    let popup = `<h3>Date Posted: ${row.date_posted}</h3><hr>
-      <h4>Day of Sighting: ${row.dayofweek}<hr>City: ${capitalCity}<hr>Shape: ${capitalShape}<hr>Category: ${category}<hr>Comments: ${row.comments}</h4>`;
+    let popup = `<h5>Date Posted: ${row.date_posted}</h5><hr>
+      <h6>Day of Sighting: ${row.dayofweek}<hr>City: ${capitalCity}<hr>Shape: ${capitalShape}<hr>Category: ${category}<hr>Comments: ${row.comments}</h6>`;
     marker.bindPopup(popup);
     markers.addLayer(marker);
 

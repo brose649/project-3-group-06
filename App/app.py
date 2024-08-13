@@ -31,17 +31,10 @@ def about_us():
     return render_template("about_us.html")
 
 # SQL Queries
-@app.route("/api/v1.0/get_dashboard/<min_attempts>/<region>")
-def get_dashboard(min_attempts, region):
-    min_attempts = int(min_attempts) # cast to int
-
-    bar_data = sql.get_bar(min_attempts, region)
-    pie_data = sql.get_pie(min_attempts, region)
-    table_data = sql.get_table(min_attempts, region)
-
+@app.route("/api/v1.0/get_dashboard/<year>")
+def get_dashboard(year):
+    table_data = sql.get_table(year)
     data = {
-        "bar_data": bar_data,
-        "pie_data": pie_data,
         "table_data": table_data
     }
     return(jsonify(data))
@@ -53,7 +46,14 @@ def get_map(shape, state):
 
     return(jsonify(map_data))
 
-
+@app.route("/api/v1.0/get_frequency/<years>")
+def get_freq(years):
+    if(years == "All"):
+        years_data = sql.get_frequency(years)
+        return(jsonify(years_data))
+    else:
+        month = sql.get_by_month(years)    
+        return(jsonify(month))
 
 # Run the App
 if __name__ == '__main__':
