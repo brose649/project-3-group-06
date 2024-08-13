@@ -30,6 +30,10 @@ def map():
 def about_us():
     return render_template("about_us.html")
 
+@app.route("/work_cited")
+def work_cited():
+    return render_template("work_cited.html")
+
 # SQL Queries
 @app.route("/api/v1.0/get_dashboard/<year>")
 def get_dashboard(year):
