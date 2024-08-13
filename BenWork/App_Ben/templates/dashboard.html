@@ -52,18 +52,90 @@
         </div>
         <hr/>
         <div class="row">
-            <label for="shape_filter">Select UFO Shape:</label>
-            <select id="shape_filter">
-                <!-- Populate with UFO shapes -->
-            </select>
+            <div class="col-md-12 align-self-center">
+                <div id="bar_chart"></div>
+            </div>
         </div>
-        <div>
-            <label for="state_filter">Select State:</label>
-            <select id="state_filter">
-                <!-- Populate with US states -->
-            </select>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="shape_filter">Select UFO Shape:</label>
+                <select id="shape_filter">
+                    <option selected>All</option>
+                    <option>light</option>
+                    <option>circle</option>
+                    <option>disk</option>
+                    <option>cylinder</option>
+                    <option>fireball</option>
+                    <option>oval</option>
+                    <option>rectangle</option>
+                    <option>sphere</option>
+                    <option>triangle</option>
+                    <option>unknown</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="state_filter">Select State:</label>
+                <select id="state_filter">
+                    <option selected>All</option>
+                    <option>ak</option>
+                    <option>al</option>
+                    <option>ar</option>
+                    <option>az</option>
+                    <option>ca</option>
+                    <option>co</option>
+                    <option>ct</option>
+                    <option>dc</option>
+                    <option>de</option>
+                    <option>fl</option>
+                    <option>ga</option>
+                    <option>hi</option>
+                    <option>ia</option>
+                    <option>id</option>
+                    <option>il</option>
+                    <option>in</option>
+                    <option>ks</option>
+                    <option>ky</option>
+                    <option>la</option>
+                    <option>ma</option>
+                    <option>md</option>
+                    <option>me</option>
+                    <option>mi</option>
+                    <option>mn</option>
+                    <option>mo</option>
+                    <option>ms</option>
+                    <option>mt</option>
+                    <option>nc</option>
+                    <option>nd</option>
+                    <option>ne</option>
+                    <option>nh</option>
+                    <option>nj</option>
+                    <option>nm</option>
+                    <option>nv</option>
+                    <option>ny</option>
+                    <option>oh</option>
+                    <option>ok</option>
+                    <option>or</option>
+                    <option>pa</option>
+                    <option>ri</option>
+                    <option>sc</option>
+                    <option>sd</option>
+                    <option>sd</option>
+                    <option>tn</option>
+                    <option>tx</option>
+                    <option>ut</option>
+                    <option>va</option>
+                    <option>vt</option>
+                    <option>wa</option>
+                    <option>wi</option>
+                    <option>wv</option>
+                    <option>wy</option>
+                </select>
+                <button id="filter">Filter!</button>
+            </div>
+            <div class="col-md-6">
+            </div>
         </div>
-        <div id="bar_chart"></div>
+        <div class="row">
             <div class="col-md-6">
                 <label for="year_filter">Years</label>
                 <select id="year_filter" >

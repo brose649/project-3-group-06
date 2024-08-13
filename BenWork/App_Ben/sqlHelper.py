@@ -112,16 +112,16 @@ class SQLHelper():
 
     # USING RAW SQL
     def get_bar(self, shape, state):
-        query = f"""
+        query = """
             SELECT
                 shape,
                 state
             FROM
                 ufo
             WHERE
-                shape = '{shape}' AND state = '{state}';
+                shape = :shape AND state = :state;
         """
-        df = pd.read_sql(query, con=self.engine)
+        df = pd.read_sql(query, con=self.engine, params={"shape": shape, "state": state})
         data = df.to_dict(orient="records")
         return data
 

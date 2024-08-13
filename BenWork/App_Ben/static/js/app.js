@@ -24,16 +24,16 @@ function do_work() {
     // make_table(data.table_data);
   });
 
-  d3.json(url3).then(function(data) {
-    // create the graph
-    make_bar(data.bar_data);
-  });
-
   d3.json(url2).then(function (data) {
 
     // create the graph
     // make_line(data);
     make_table(data.table_data);
+  });
+
+  d3.json(url3).then(function(data) {
+    // create the graph
+    make_bar(data.bar_data);
   });
 }
 
