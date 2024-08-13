@@ -43,6 +43,12 @@ def get_dashboard(year):
     }
     return(jsonify(data))
 
+# @app.route('/api/v1.0/get_dashboard', methods=['GET'])
+# def get_dashboard():
+#     # Your code to fetch and return the data
+#     data = fetch_dashboard_data()  # Implement this function to get your data
+#     return jsonify(data)
+
 @app.route("/api/v1.0/get_map/<shape>/<state>")
 def get_map(shape, state):
     # min_attempts = int(min_attempts) # cast to int
@@ -52,12 +58,29 @@ def get_map(shape, state):
 
 @app.route("/api/v1.0/get_frequency/<years>")
 def get_freq(years):
+    # if(years == "All"):
+    #     years_data = sql.get_frequency(years)
+    #     return(jsonify(years_data))
+    # else:
+    #     month = sql.get_by_month(years)    
+    #     return(jsonify(month))
+# def get_data(years):
+#     print(years)
+
+#     # execute the queries
+    # line_data = sqlHelper.getMapData(region)
     if(years == "All"):
-        years_data = sql.get_frequency(years)
-        return(jsonify(years_data))
+        line_data = sql.get_frequency(years)
+        # return(jsonify(years_data))
     else:
-        month = sql.get_by_month(years)    
-        return(jsonify(month))
+        line_data = sql.get_by_month(years)    
+        # return(jsonify(month))
+    table_data = sql.get_table(years)
+
+    data = {"line_data": line_data,
+            "table_data": table_data}
+
+    return jsonify(data)
 
 # Run the App
 if __name__ == '__main__':

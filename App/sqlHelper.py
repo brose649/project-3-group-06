@@ -39,7 +39,7 @@ class SQLHelper():
         if year == 'All':
             where_clause = "1=1"
         else:
-            where_clause = f"year = { year }"
+            where_clause = f"year = {year}"
 
         query = f"""
                 SELECT 
@@ -84,9 +84,9 @@ class SQLHelper():
     def get_table(self, year):
         # switch on user_region
         if year == 'All':
-            where_clause = "and 1=1"
+            where_clause = "1=1"
         else:
-            where_clause = f"and year = '{year}'"
+            where_clause = f"year = {year}"
         # build the query
         query = f"""
             SELECT
@@ -97,14 +97,15 @@ class SQLHelper():
                 month,
                 year,
                 latitude,
-                longitude
+                longitude,
+                comments
             FROM
                 ufo
             WHERE
                 {where_clause}
             ORDER BY
                 dayofweek DESC;
-        """
+            """
         df = pd.read_sql(text(query), con = self.engine)
         data = df.to_dict(orient="records")
         return(data)

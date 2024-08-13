@@ -1,7 +1,7 @@
 function do_work() {
   // extract user input
   let years = d3.select("#year_filter").property("value");
-  let year = d3.select("#year_filter").property("value");
+  // let year = d3.select("#year_filter").property("value");
 
   if(years === "All") {
     console.log("Data for all years " + years)
@@ -11,32 +11,39 @@ function do_work() {
 
   // We need to make a request to the API
   let url = `/api/v1.0/get_frequency/${years}`;
-  let url2 = `/api/v1.0/get_dashboard/${year}`;
+  // let url2 = `/api/v1.0/get_dashboard/${year}`;
   d3.json(url).then(function (data) {
 
     // create the graph
     make_line(data);
-    // make_table(data.table_data);
+    make_table(data);
   });
 
-  d3.json(url2).then(function (data) {
+  // d3.json(url2).then(function (data) {
 
-    // create the graph
-    // make_line(data);
-    make_table(data.table_data);
-  });
+  //   // if (region !== "All") {
+  //   //   filtered_data = data.filter(x => x.year === year);
+  //   // }
+
+  //   // create the graph
+  //   make_table(data.table_data);
+  // });
 }
 
-function make_table(filtered_data) {
-  console.log(filtered_data);
+function make_table(data_object) {
+  // console.log(data_object);
+  // console.log(data_object.table_data);
+  // console.log(data_object.table_data[0]);
+  $('#data_table').DataTable().clear().destroy();
   // select table
   let table = d3.select("#data_table");
   let table_body = table.select("tbody");
   table_body.html(""); // destroy any existing rows
   // create table
-  for (let i = 0; i < filtered_data.length; i++){
+  for (let i = 0; i < data_object.table_data.length; i++){
+    console.log(data_object.table_data[i]);
     // get data row
-    let data_row = filtered_data[i];
+    let data_row = data_object.table_data[i];
     // creates new row in the table
     let row = table_body.append("tr");
     row.append("td").text(data_row.dayofweek);
@@ -47,25 +54,27 @@ function make_table(filtered_data) {
     row.append("td").text(data_row.year);
     row.append("td").text(data_row.latitude);
     row.append("td").text(data_row.longitude);
-    row.append("td").text(data_row.comment);
+    row.append("td").text(data_row.comments);
   }
+  $('#data_table').DataTable();
 }
 
 
-function make_line(filtered_data) {
+function make_line(data_object) {
 
   // this prints all of the filtered data we get from the query
-  // console.log(filtered_data);
+  console.log(data_object);
+  console.log(data_object.line_data);
   
-  let freq = filtered_data.map(entry => entry.frequency);
+  let freq = data_object.line_data.map(entry => entry.frequency);
   let timeData;
   let title;
-  if(filtered_data.length > 12) {
-    timeData = filtered_data.map(entry => entry.years);
+  if(data_object.line_data.length > 12) {
+    timeData = data_object.line_data.map(entry => entry.years);
     title = "Year";
     
   } else {
-    timeData = filtered_data.map(entry => entry.month);
+    timeData = data_object.line_data.map(entry => entry.month);
     title = "Month";
   }
 
