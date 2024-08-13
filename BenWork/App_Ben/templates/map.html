@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UFO Sightings Map</title>
+
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://bootswatch.com/5/darkly/bootstrap.min.css", rel="stylesheet">
+    <link href="./static/css/static.css" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+
+    <!-- Leaflet JavaScript code -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
+
+    <!-- Leaflet heatmap plugin-->
+    <script type="text/javascript" src="static/js/leaflet-heat.js"></script>
+
+    <!-- Marker cluster JavaScript code -->
+    <script type="text/javascript" src="https://unpkg.com/leaflet.markercluster@1.0.3/dist/leaflet.markercluster.js"></script>
+
+    <!-- Marker cluster CSS -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.3/dist/MarkerCluster.Default.css">
+
+
+    <!-- JS IMPORTS - External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <!-- <nav class="navbar navbar-expand-lg" data-bs-theme="dark"> -->
+    <nav class="navbar navbar-expand-lg" style="background-image: url('/static/images/banner.jpg');" data-bs-theme="dark">
+        <div class="container-fluid">
+            <!-- <a class="navbar-brand"  href="/"><img src="static/icons/alien.png" alt="Logo" width="32" height="32" class="d-inline-block align-text-top"></a> -->
+            <div class="navbar-brand">
+                <img src="static/icons/alien.png" alt="Logo" width="32" height="32" class="d-inline-block align-text-top">
+            </div>
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/dashboard">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" href="/map">Map</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/about_us">About Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- add spacing -->
+    <br/>
+
+    <!-- Dashboard -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>UFO Sightings Map</h1>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="state_filter">State</label>
+                <select id="state_filter">
+                    <option selected>All</option>
+                    <option value="ak">Alaska</option>
+                    <option value="al">Alabama</option>
+                    <option value="ar">Arkansas</option>
+                    <option value="az">Arizona</option>
+                    <option value="ca">California</option>
+                    <option value="co">Colorado</option>
+                    <option value="ct">Connecticut</option>
+                    <option value="dc">District of Columbia</option>
+                    <option value="de">Delaware</option>
+                    <option value="fl">Florida</option>
+                    <option value="ga">Georgia</option>
+                    <option value="hi">Hawaii</option>
+                    <option value="ia">Iowa</option>
+                    <option value="id">Idaho</option>
+                    <option value="il">Illinois</option>
+                    <option value="in">Indiana</option>
+                    <option value="ks">Kansas</option>
+                    <option value="ky">Kentucky</option>
+                    <option value="la">Louisiana</option>
+                    <option value="ma">Massachusetts</option>
+                    <option value="md">Maryland</option>
+                    <option value="me">Maine</option>
+                    <option value="mi">Michigan</option>
+                    <option value="mn">Minnesota</option>
+                    <option value="mo">Missouri</option>
+                    <option value="ms">Mississippi</option>
+                    <option value="mt">Montana</option>
+                    <option value="nc">North Carolina</option>
+                    <option value="nd">North Dakota</option>
+                    <option value="ne">Nebraska</option>
+                    <option value="nh">New Hampshire</option>
+                    <option value="nj">New Jersey</option>
+                    <option value="nm">New Mexico</option>
+                    <option value="nv">Nevada</option>
+                    <option value="ny">New York</option>
+                    <option value="oh">Ohio</option>
+                    <option value="ok">Oklahoma</option>
+                    <option value="or">Oregon</option>
+                    <option value="pa">Pennsylvania</option>
+                    <option value="pr">Puerto Rico</option>
+                    <option value="ri">Rhode Island</option>
+                    <option value="sc">South Carolina</option>
+                    <option value="sd">South Dakota</option>
+                    <option value="tn">Tennessee</option>
+                    <option value="tx">Texas</option>
+                    <option value="ut">Utah</option>
+                    <option value="va">Virginia</option>
+                    <option value="vt">Vermont</option>
+                    <option value="wa">Washington</option>
+                    <option value="wi">Wisconsin</option>
+                    <option value="wv">West Virginia</option>
+                    <option value="wy">Wyoming</option>
+                </select>
+
+                <!-- <label for="shape_filter">Shape</label>
+                <select id="shape_filter">
+                    <option selected>All</option>  
+                    <option value="changing">Changing</option>
+                    <option value="chevron">Chevron</option>
+                    <option value="cigar">Cigar</option>
+                    <option value="circle">Circle</option>
+                    <option value="cylinder">Cylinder</option>
+                    <option value="diamond">Diamond</option>
+                    <option value="disk">Disk</option>
+                    <option value="egg">Egg</option>
+                    <option value="fireball">Fireball</option>
+                    <option value="flash">Flash</option>
+                    <option value="formation">Formation</option>
+                    <option value="light">Light</option>
+                    <option value="other">Other</option>
+                    <option value="oval">Oval</option>
+                    <option value="rectangle">Rectangle</option>
+                    <option value="sphere">Sphere</option>
+                    <option value="teardrop">Teardrop</option>
+                    <option value="triangle">Triangle</option>
+                    <option value="unknown">Unknown</option>                               
+                </select> -->
+
+                <label for="category_filter">Category</label>
+                <select id="category_filter">
+                    <option selected>All</option>  
+                    <option value="Circular">Circular</option>
+                    <option value="Angular">Angular</option>
+                    <option value="Formation">Formation</option>
+                    <option value="Luminous">Luminous</option>
+                    <option value="Other">Other</option>
+                    <option value="Elliptical">Elliptical</option>
+                    <option value="Rectangular">Rectangular</option>
+                </select>
+
+                <button id="filter">Filter!</button>
+                
+            </div>
+            <div class="col-md-6">
+                <!-- <p>Use the filters on the left to narrow down reported sightings by State and by Shape of the unknown object.
+                    Within the map is an additional layer for a heatmap of reported sightings.
+                </p> -->
+                <p>
+                    This map allows you to explore reported UFO sightings across the United States.
+                    Use the filters on the left to narrow down the sightings by specified State or Category.
+                    When you click Filter! the map will update with only sightings matching your chosen filters 
+                    Click on any marker to bring up additional information for each sighting.
+                    Additionally, you can choose from different map layouts as well as toggle a heatmap of the filtered sightings!
+                </p>
+                
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div id="map-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+
+    <script src="./static/js/map.js"></script>
+</body>
+
+</html>
