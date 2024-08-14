@@ -41,7 +41,7 @@ function make_table(data_object) {
   table_body.html(""); // destroy any existing rows
   // create table
   for (let i = 0; i < data_object.table_data.length; i++){
-    console.log(data_object.table_data[i]);
+    // console.log(data_object.table_data[i]);
     // get data row
     let data_row = data_object.table_data[i];
     // creates new row in the table

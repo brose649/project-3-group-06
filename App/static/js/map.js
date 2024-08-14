@@ -19,12 +19,12 @@ function createMap(data) {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
   });
 
-  let Stadia_AlidadeSmoothDark = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}', {
-    minZoom: 0,
-    maxZoom: 20,
-    attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    ext: 'png'
-  });
+  // let Stadia_AlidadeSmoothDark = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}', {
+  //   minZoom: 0,
+  //   maxZoom: 20,
+  //   attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  //   ext: 'png'
+  // });
 
   // Step 2: Create the Overlay layers
   let markers = L.markerClusterGroup();
@@ -94,8 +94,8 @@ function createMap(data) {
 
   // create layer
   let heatLayer = L.heatLayer(heatArray, {
-    radius: 25,
-    blur: 20
+    radius: 40,
+    blur: 15
   });
 
   // Step 3: BUILD the Layer Controls
@@ -104,8 +104,8 @@ function createMap(data) {
   let baseLayers = {
     Dark: darkMatter,
     Street: street,
-    Topography: topo,
-    SmoothDark: Stadia_AlidadeSmoothDark
+    Topography: topo
+    // SmoothDark: Stadia_AlidadeSmoothDark
   };
 
   let overlayLayers = {
