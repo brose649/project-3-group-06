@@ -118,12 +118,6 @@ class SQLHelper():
         else:
             state_clause = f"and state = '{state}'"
 
-        # # switch on shape
-        # if shape == 'All':
-        #     shape_clause = "and 1=1"
-        # else:
-        #     shape_clause = f"and shape = '{shape}'"
-
         # switch on category
         if category == 'All':
             category_clause = "and 1=1"

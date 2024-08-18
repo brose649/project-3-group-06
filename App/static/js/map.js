@@ -1,8 +1,3 @@
-// GOAL 1
-// Can I render a basic base map? - Set up Leaflet correctly
-// Can we fetch the data that we need to plot?
-
-
 function createMap(data) {
   // STEP 1: Init the Base Layers
 
@@ -19,13 +14,6 @@ function createMap(data) {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
   });
 
-  // let Stadia_AlidadeSmoothDark = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.{ext}', {
-  //   minZoom: 0,
-  //   maxZoom: 20,
-  //   attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  //   ext: 'png'
-  // });
-
   // Step 2: Create the Overlay layers
   let markers = L.markerClusterGroup();
   let heatArray = [];
@@ -33,6 +21,7 @@ function createMap(data) {
   let markerColor = 'green';
 
   //Custom Icons to be loaded onto markers for each Category
+  // There are far more shapes than categories in our dataset. Applying custom icons to each marker based on category allows for quick visual representation of each marker.
   const iconMapping = {
     'Circular': 'static/icons/circle.png',
     'Angular': 'static/icons/triangle.png',
@@ -47,7 +36,6 @@ function createMap(data) {
     let row = data[i];
     let latitude = row.latitude;
     let longitude = row.longitude;
-    // let shape = row.shape;
 
     // Once category column is created, use this to convert to variable for icon usage
     let category = row.category;
@@ -62,14 +50,6 @@ function createMap(data) {
     const capitalizeString = str => str.replace(/\b\w/g, substr => substr.toUpperCase());
     let capitalCity = capitalizeString(row.city);
     let capitalShape = capitalizeString(row.shape);
-
-    // Create a custom icon with the color
-    // let customIcon = L.divIcon({
-    //   className: 'custom-div-icon',
-    //   html: `<div style="background-color:${markerColor}; width:20px; height:20px; border-radius:50%;"></div>`,
-    //   iconSize: [20, 20],
-    //   popupAnchor: [0, -10]
-    // });
 
     // Create a custom icon with the color and custom icon
     let customIcon = L.divIcon({
@@ -92,7 +72,7 @@ function createMap(data) {
     heatArray.push(point);
   }
 
-  // create layer
+  // create heat layer
   let heatLayer = L.heatLayer(heatArray, {
     radius: 40,
     blur: 15
@@ -105,7 +85,6 @@ function createMap(data) {
     Dark: darkMatter,
     Street: street,
     Topography: topo
-    // SmoothDark: Stadia_AlidadeSmoothDark
   };
 
   let overlayLayers = {
@@ -127,14 +106,13 @@ function createMap(data) {
     layers: [darkMatter, markers]
   });
 
-  // Step 5: Add the Layer Control filter + legends as needed
+  // Step 5: Add the Layer Control filter
   L.control.layers(baseLayers, overlayLayers).addTo(myMap);
 
 }
 
 function do_work() {
   // Extract user input (abbreviation will be sent)
-  // let shape = d3.select("#shape_filter").property("value");
   let state = d3.select("#state_filter").property("value");
   let categoryValue = d3.select("#category_filter").property("value");
 

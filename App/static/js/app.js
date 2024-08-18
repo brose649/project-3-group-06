@@ -1,7 +1,6 @@
 function do_work() {
   // extract user input
   let years = d3.select("#year_filter").property("value");
-  // let year = d3.select("#year_filter").property("value");
 
   if(years === "All") {
     console.log("Data for all years " + years)
@@ -11,39 +10,30 @@ function do_work() {
 
   // We need to make a request to the API
   let url = `/api/v1.0/get_frequency/${years}`;
-  // let url2 = `/api/v1.0/get_dashboard/${year}`;
+
   d3.json(url).then(function (data) {
 
     // create the graph
     make_line(data);
     make_table(data);
   });
-
-  // d3.json(url2).then(function (data) {
-
-  //   // if (region !== "All") {
-  //   //   filtered_data = data.filter(x => x.year === year);
-  //   // }
-
-  //   // create the graph
-  //   make_table(data.table_data);
-  // });
 }
 
 function make_table(data_object) {
-  // console.log(data_object);
-  // console.log(data_object.table_data);
-  // console.log(data_object.table_data[0]);
   $('#data_table').DataTable().clear().destroy();
+
   // select table
   let table = d3.select("#data_table");
   let table_body = table.select("tbody");
+
   table_body.html(""); // destroy any existing rows
+
   // create table
   for (let i = 0; i < data_object.table_data.length; i++){
-    // console.log(data_object.table_data[i]);
+
     // get data row
     let data_row = data_object.table_data[i];
+
     // creates new row in the table
     let row = table_body.append("tr");
     row.append("td").text(data_row.dayofweek);
@@ -56,6 +46,7 @@ function make_table(data_object) {
     row.append("td").text(data_row.longitude);
     row.append("td").text(data_row.comments);
   }
+  
   $('#data_table').DataTable();
 }
 

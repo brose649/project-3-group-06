@@ -41,10 +41,8 @@
 
 <body>
     <!-- NAVBAR -->
-    <!-- <nav class="navbar navbar-expand-lg" data-bs-theme="dark"> -->
     <nav class="navbar navbar-expand-lg" style="background-image: url('/static/images/banner.jpg');" data-bs-theme="dark">
         <div class="container-fluid">
-            <!-- <a class="navbar-brand"  href="/"><img src="static/icons/alien.png" alt="Logo" width="32" height="32" class="d-inline-block align-text-top"></a> -->
             <div class="navbar-brand">
                 <img src="static/icons/alien.png" alt="Logo" width="32" height="32" class="d-inline-block align-text-top">
             </div>
@@ -82,6 +80,7 @@
         <div class="row">
             <div class="col-md-6">
                 <label for="state_filter">State</label>
+                <!-- The State values in dataset are lower-case abbreviations. Applying custom text values for dropdown filter for better readability. -->
                 <select id="state_filter">
                     <option selected>All</option>
                     <option value="ak">Alaska</option>
@@ -138,30 +137,6 @@
                     <option value="wy">Wyoming</option>
                 </select>
 
-                <!-- <label for="shape_filter">Shape</label>
-                <select id="shape_filter">
-                    <option selected>All</option>  
-                    <option value="changing">Changing</option>
-                    <option value="chevron">Chevron</option>
-                    <option value="cigar">Cigar</option>
-                    <option value="circle">Circle</option>
-                    <option value="cylinder">Cylinder</option>
-                    <option value="diamond">Diamond</option>
-                    <option value="disk">Disk</option>
-                    <option value="egg">Egg</option>
-                    <option value="fireball">Fireball</option>
-                    <option value="flash">Flash</option>
-                    <option value="formation">Formation</option>
-                    <option value="light">Light</option>
-                    <option value="other">Other</option>
-                    <option value="oval">Oval</option>
-                    <option value="rectangle">Rectangle</option>
-                    <option value="sphere">Sphere</option>
-                    <option value="teardrop">Teardrop</option>
-                    <option value="triangle">Triangle</option>
-                    <option value="unknown">Unknown</option>                               
-                </select> -->
-
                 <label for="category_filter">Category</label>
                 <select id="category_filter">
                     <option selected>All</option>  
@@ -178,9 +153,6 @@
                 
             </div>
             <div class="col-md-6">
-                <!-- <p>Use the filters on the left to narrow down reported sightings by State and by Shape of the unknown object.
-                    Within the map is an additional layer for a heatmap of reported sightings.
-                </p> -->
                 <p>
                     This map allows you to explore reported UFO sightings across the United States.
                     Use the filters on the left to narrow down the sightings by specified State or Category.
